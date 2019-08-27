@@ -1,0 +1,25 @@
+name: Less than 1 HTTP 200 in the last 30 minutes
+type: flatline
+index: kibana_sample_data_logs*
+threshold: 1
+timeframe:
+  minutes: 30
+
+# 24H mode and UTC time (UTC +2 in France so the range is 6am 10pm)
+start_time: "4:00"
+end_time: "20:00"
+# Drop match and cancel alert if (inside/outside) range
+drop_if: "outside"
+
+filter:
+  - query:
+      query_string:
+        query: "response: 20*"
+
+match_enhancements:
+  - "elastalert_modules.hour_range_enhancement.HourRangeEnhancement"
+alert:
+  - "email"
+email:
+  - "youremail@example.com"
+
