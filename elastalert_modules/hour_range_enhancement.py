@@ -7,7 +7,7 @@ class HourRangeEnhancement(BaseEnhancement):
 	def process(self, match):
 		timestamp = dateutil.parser.parse(match['timestamp']).time()
 		time_start = dateutil.parser.parse(self.rule['start_time']).time()
-                time_end = dateutil.parser.parse(self.rule['end_time']).time()
+		time_end = dateutil.parser.parse(self.rule['end_time']).time()
 		if(self.rule['drop_if'] == 'outside'):
 			if timestamp < time_start or timestamp > time_end:
 				raise DropMatchException()
