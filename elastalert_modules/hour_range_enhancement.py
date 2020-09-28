@@ -11,7 +11,7 @@ class HourRangeEnhancement(BaseEnhancement):
             timestamp = dateutil.parser.parse(match['@timestamp']).time()
         except Exception:
             try:
-                timestamp = dateutil.parser.parse(match['timestamp']).time()
+                timestamp = dateutil.parser.parse(match[self.rule['timestamp_field']]).time()
             except Exception:
                 pass
         if timestamp is not None:
